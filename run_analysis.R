@@ -1,5 +1,6 @@
 ## Getting and Cleaning Data Assignment
 
+#Loading data.table and reshaph2 packages
 require("data.table")
 require("reshape2")
 
@@ -26,7 +27,7 @@ y_test[,2] = activity_labels[y_test[,1]]
 names(y_test) = c("Activity_ID", "Activity_Label")
 names(subject_test) = "subject"
 
-# Binding test data 
+# Binding test data
 test_data <- cbind(as.data.table(subject_test), y_test, X_test)
 
 # Loading X_train & y_train
@@ -56,4 +57,4 @@ melt_data = melt(data, id = id_labels, measure.vars = data_labels)
 
 # Applying mean function to dataset
 tidy_data   = dcast(melt_data, subject + Activity_Label ~ variable, mean)
-write.table(tidy_data, file = "./tidy_data.txt")
+write.table(tidy_data, file = "./tidy_data.txt", row.name=FALSE)
